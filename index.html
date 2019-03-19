@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>2048</title>
+    <style>
+        table {
+            background-color: lightblue;
+            margin: 200px auto auto;
+            position: relative;
+        }
+
+        td {
+            background-color: blue;
+            width: 50px;
+            height: 50px;
+        }
+
+        div {
+            background-color: green;
+            width: 35px;
+            height: 35px;
+            margin: auto;
+        }
+
+        .tile {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background-color: chartreuse;
+            z-index: 900;
+        }
+        
+    </style>
+    <script src="jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+    <script>
+
+        var tileSize = 50;
+        var grid = [[null, null, null, null], [null, null, null, null], [null, null, null, null], [null, null, null, null]];
+        var emptyHolders = [0, 1, 2, 3,
+            4, 5, 6, 7,
+            8, 9, 10, 11,
+            12, 13, 14, 15];
+
+        var Tile = (function () {
+            return function (row, col, val) {
+                this.row = row;
+                this.col = col;
+                this.val = val || 2;
+            }
+        })();
+
+        //to deserliaze : row*4 + col
+
+        function generateRandomTile() {
+            // 1. Generate two random numbers between 1 and 4
+            // 2. Create new tile
+            var randomIndex = Math.floor(Math.random() * emptyHolders.length);
+            var newTileLocation = emptyHolders[randomIndex];
+            var newTileRow = Math.floor(newTileLocation / 4);
+            var newTileColumn = newTileLocation % 4;
+            var newTile = new Tile(newTileRow, newTileColumn, 2);
+            popTile(newTile);
+            emptyHolders.splice(randomIndex, 1);
+            grid[newTileRow][newTileColumn] = newTile;
+        }
+
+        function popTile(tile) {
+            $("table").append("<div class='tile'></div>");
+            $("table").children().last().css("left: " + (tile.col * tileSize + 2) + "px");
+            $("table").children().last().css("top: " + (tile.row * tileSize + 2) + "px");
+            
+            // $(".row-" + tile.row + ".col-" + tile.col).append("<div class='tile row-" + tile.row + " col-" + tile.col + "'></div>");
+            // var classes = ".row-" + tile.row + " .col-" + tile.col;
+
+        }
+        function moveLeft() {
+        }
+        function moveRight() {
+
+        }
+        function moveUp() {
+            //check state
+            //if fusion 
+
+        }
+        function moveDown() {
+
+        }
+
+        //fuse two tiles
+        function fuse(tileFrom, tileTo) {
+            //slide(tile, row, col)
+            //nullify objects, update holders, update grid
+            //new tile, update holders, update grid,
+            //poptile(tile)
+        }
+
+        //apply slide animation on tile, move it from its location to row and col
+        function slideTile(tile, row, col) {
+
+        }
+
+
+
+
+
+
+
+
+        $(document).ready(function () {
+            // generateRandomTile();
+        });
+    </script>
+    <table id="grid">
+        <tr>
+            <td class="row-0 col-0"></td>
+            <td class="row-0 col-1"></td>
+            <td class="row-0 col-2"></td>
+            <td class="row-0 col-3"></td>
+        </tr>
+        <tr>
+            <td class="row-1 col-0"></td>
+            <td class="row-1 col-1"></td>
+            <td class="row-1 col-2"></td>
+            <td class="row-1 col-3"></td>
+        </tr>
+        <tr>
+            <td class="row-2 col-0"></td>
+            <td class="row-2 col-1"></td>
+            <td class="row-2 col-2"></td>
+            <td class="row-2 col-3"></td>
+        </tr>
+        <tr>
+            <td class="row-3 col-0"></td>
+            <td class="row-3 col-1"></td>
+            <td class="row-3 col-2"></td>
+            <td class="row-3 col-3"></td>
+        </tr>
+    </table>
+</body>
+
+</html>
